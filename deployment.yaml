@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-hello-world
+  namespace: default
+  labels:
+    app: app-hello-world
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-hello-world
+  template:
+    metadata:
+      labels:
+        app: app-hello-world
+    spec:
+      containers:
+      - name: app-hello-world-ctr
+        image: gcr.io/devsecops-287721/hello-world:latest
+        ports:
+        - containerPort: 80

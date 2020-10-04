@@ -1,15 +1,19 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  labels:
-    run: hello-docker
-  name: hello-docker
-  namespace: foo
+  name: hello-world
 spec:
-  containers:
-  - image: harik8/hello-docker
-    name: hello-docker
-    resources: {}
-  dnsPolicy: ClusterFirst
-  restartPolicy: Never
-status: {}
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+      - name: hello-world-ctr
+        image: gcr.io/devsecops-287721/hello-world:latest
+        ports:
+        - containerPort: 80

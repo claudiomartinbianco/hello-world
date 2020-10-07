@@ -4,7 +4,7 @@ pipeline {
         PROJECT_ID = 'devsecops-287721'
         CLUSTER_NAME = 'cluster-1'
         LOCATION = 'us-central1-c'
-        CREDENTIALS_ID = 'devsecops-gcr-credentials-cmb'
+        CREDENTIALS_ID = 'gke'
     }
     stages {
         stage("Checkout code") {

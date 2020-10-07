@@ -1,22 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-hello-world
-  namespace: default
-  labels:
-    app: app-hello-world
+name: hello
+labels:
+  app: hello
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: app-hello-world
-  template:
-    metadata:
-      labels:
-        app: app-hello-world
-    spec:
-      containers:
-      - name: app-hello-world-ctr
-        image: gcr.io/devsecops-287721/hello-world:latest
-        ports:
-        - containerPort: 80
+strategy:
+  type: Recreate
+template:
+  metadata:
+    labels:
+      app: hello
+      tier: hello
+  spec:
+    containers:
+    - name: hello
+      image: DOCKER-HUB-USERNAME/hello:latest
+      imagePullPolicy: Always
+      ports:
+      - containerPort: 5000
+        name: hello
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+name: hello
+labels:
+  app: hello
+spec:
+ports:
+  - port: 5000
+    targetPort: 5000
+selector:
+  app: hello
+  tier: hello
+type: LoadBalancer

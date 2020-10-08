@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage("Checkout code") {
             steps {
-                checkout scm
+                git url:'https://github.com/claudiomartinbianco/hello-world.git'
             }
         }
         stage("Build image") {

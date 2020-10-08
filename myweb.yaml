@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: myweb
+  namespace: default
+  labels:
+    app: myweb
+    
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myweb
+  template:
+    metadata:
+      labels:
+        app: myweb
+    spec:
+      containers:
+      - image: gcr.io/devsecops-287721/demo-dotnetcore:latest
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+
+kind: Service
+
+metadata:
+  name: myweb
+  namespace: default
+  labels:
+    app: myweb
+spec:
+  type: LoadBalancer
+  selector:
+    app: myweb  
+  ports:
+    protocol: TCP
+    port: 80
+    targetPort: 80

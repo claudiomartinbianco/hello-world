@@ -26,7 +26,7 @@ pipeline {
         stage('Deploy to GKE') {
             steps{
                 script {
-                    kubernetesDeploy(configs: "", kubeconfigId: "")
+                    kubernetesDeploy(configs: "deployment.yaml", kubeconfigId: "meukube")
                 }
             }
         }

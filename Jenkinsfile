@@ -1,11 +1,5 @@
 pipeline {
-    agent any
-    environment {
-        PROJECT_ID = 'devsecops-287721'
-        CLUSTER_NAME = 'cluster-1'
-        LOCATION = 'us-central1-c'
-        CREDENTIALS_ID = 'gke'
-    }
+    agent { Labe 'kubepod' }
     stages {
         stage("Checkout code") {
             steps {
@@ -31,8 +25,9 @@ pipeline {
         }        
         stage('Deploy to GKE') {
             steps{
-                sh "sed -i 's/hello-world:latest/hello-world:${env.BUILD_ID}/g' deployment.yaml"
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+                script {
+                    kubernetesDeploy(configs: "", kubeconfigId: "")
+                }
             }
         }
     }    

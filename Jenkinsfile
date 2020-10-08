@@ -1,6 +1,6 @@
 pipeline {
     
-    agent { Label "kubepod" }
+    agent { label 'kubepod' }
     
     stages {
         stage("Checkout code") {

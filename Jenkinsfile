@@ -1,22 +1,22 @@
 pipeline {
     
-    agent { 
-        label 'kubepod' 
-    }
+    agent any
     
     stages {
         stage("Checkout code") {
             steps {
                 git url:'https://github.com/claudiomartinbianco/hello-world.git'
             }
-        }
+        }        
         
-        stage('Deploy to GKE') {
-            steps{
-                script {
-                    kubernetesDeploy(configs: "deployment.yaml", kubeconfigId: "mykubeconfig")
-                }
-            }
+    stage('Deploy App') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "mykubeconfig")
         }
+      }
+    }
+        
+        
     }    
 }

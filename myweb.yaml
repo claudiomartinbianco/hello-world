@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: docker-1
-        image: gcr.io/devsecops-287721/hello-world:latest
+        image: gcr.io/logics-2-0-nonprod/hello-world:latest
         ports:
         - containerPort: 8080

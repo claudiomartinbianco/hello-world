@@ -13,7 +13,6 @@ pipeline {
       steps {
         script {
           kubernetesDeploy(configs: 'myweb.yaml', kubeconfigId: 'mykubeconfig', enableConfigSubstitution: true)
-        )
         }
       }
     }

@@ -12,7 +12,7 @@ pipeline {
     stage('Deploy App') {
       steps {
         script {
-          kubernetesDeploy(configs: 'myweb.yaml', kubeconfigId: 'mykubeconfig', enableConfigSubstitution: true)
+          kubernetesDeploy(configs: 'myweb.yaml', kubeconfigId: 'devsecops-gcr-credentials', enableConfigSubstitution: true)
         }
       }
     }

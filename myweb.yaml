@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: docker-1
-        image: gcr.io/devsecops-287721/jenkins-docker:v1
+        image: gcr.io/devsecops-287721/hello-world:latest
         ports:
         - containerPort: 8080

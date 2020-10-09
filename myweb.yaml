@@ -1,19 +1,18 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: docker
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: docker
-  template:
-    metadata:
-      labels:
-        app: docker
-    spec:
-      containers:
-      - name: docker-1
-        image: gcr.io/devsecops-287721/jenkins-docker:v1
-        ports:
-        - containerPort: 8080
+apiVersion: apps/v1beta1 
+kind: Deployment 
+metadata: 
+name: recruitment-service-deployment 
+namespace: development 
+labels: 
+app: recruitment-service-app 
+spec: 
+replicas: 1 
+template: 
+metadata: 
+labels: 
+apps: 
+recruitment-service 
+spec: containers: 
+- name: recruitment-service 
+image: gcr.io/bats-qa/recruitment-service:development 
+ports: - containerPort: 8081

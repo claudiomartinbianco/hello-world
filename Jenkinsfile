@@ -1,11 +1,6 @@
 pipeline {
     
-    agent {
-        kubernetes {
-            cloud "kubernetes" // Cloud Kubernetes Name
-            label "jnlp"       // jnlp pod template label
-        }
-    }
+    agent any
     
     stages {
         

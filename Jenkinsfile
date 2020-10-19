@@ -12,14 +12,14 @@ pipeline {
         
         stage("Config") {
             steps {
-
+                script{
                     def namespace = "default"
                         withCredentials([file(credentialsId: 'devsecops-gcr-credentials', variable: 'KUBECONFIG')]) {
 
                           // change context with related namespace
                           echo '$(kubectl config current-context)'
                         }
-
+                }
             }
         }        
         

@@ -35,7 +35,7 @@ withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'J
     sh """
     curl -Lo /tmp/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
     mkdir -p /usr/local/gcloud
-    RUN tar -C /usr/local/gcloud -xvf /tmp/google-cloud-sdk.tar.gz
+    tar -C /usr/local/gcloud -xvf /tmp/google-cloud-sdk.tar.gz
     /usr/local/gcloud/google-cloud-sdk/install.sh
     /usr/local/gcloud/google-cloud-sdk/bin/gcloud init
     """

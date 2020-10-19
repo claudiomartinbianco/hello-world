@@ -10,6 +10,16 @@ pipeline {
             }
         }        
         
+        stage("Config") {
+            steps {
+                withCredentials([file(credentialsId: 'gcr:devsecops-gcr-credentials', variable: 'KUBECONFIG')]) {
+
+                  // change context with related namespace
+                  sh "kubectl config set-context $(kubectl config current-context) --namespace=${namespace}"
+                }
+            }
+        }        
+        
         stage('Deploy App') {
           steps {
             script {

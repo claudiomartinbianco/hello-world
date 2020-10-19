@@ -15,11 +15,10 @@ pipeline {
             steps {
                 script{
                            
-                    
-                    withCredentials([[$class: 'FileBinding', credentialsId: 'mygcp', variable: 'JSON_KEY']]) {
-                      sh 'gcloud auth activate-service-account --key-file $JSON_KEY'
-                      sh 'make yourstuff'
-                    }                    
+                withCredentials([file(credentialsId: 'mygcp', variable: 'GC_KEY')]) {
+                    sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
+                    sh("gcloud container clusters get-credentials prod --zone northamerica-northeast1-a --project ${project}")
+                  }                                      
 
                 }
             }

@@ -31,8 +31,14 @@ withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'J
                 chmod a+x /usr/local/bin/kubectl
                 """                 
     
+                sh """
+                curl -Lo /tmp/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
+                tar -xvf /tmp/google-cloud-sdk.tar.gz -C /usr/local/gcloud               
+                echo y |/usr/local/gcloud/google-cloud-sdk/install.sh
+                chmod +x ./gradlew
+                """
     
-  sh 'sh "kubectl config set-context $(kubectl config current-context)'
+  sh 'gcloud auth activate-service-account --key-file $JSON_KEY'
     
     
   // sh 'make yourstuff'

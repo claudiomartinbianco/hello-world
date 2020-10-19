@@ -16,7 +16,7 @@ pipeline {
                 script{
                            
                     
-                    withCredentials([[$class: 'FileBinding', credentialsId: 'devsecops-gcr-credentials', variable: 'JSON_KEY']]) {
+                    withCredentials([[$class: 'FileBinding', credentialsId: 'mygcp', variable: 'JSON_KEY']]) {
                       sh 'gcloud auth activate-service-account --key-file $JSON_KEY'
                       sh 'make yourstuff'
                     }                    

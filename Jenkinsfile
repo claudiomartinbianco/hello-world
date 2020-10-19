@@ -33,6 +33,7 @@ withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'J
     
                 sh """
                 curl -Lo /tmp/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
+                mkdir -p /usr/local/gcloud
                 tar -xvf /tmp/google-cloud-sdk.tar.gz -C /usr/local/gcloud               
                 echo y |/usr/local/gcloud/google-cloud-sdk/install.sh
                 chmod +x ./gradlew

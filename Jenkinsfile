@@ -11,6 +11,14 @@ pipeline {
         }        
              
         
+        stage('Certo') {
+          steps {
+            script {
+              kubernetesDeploy(configs: 'myweb.yaml', kubeconfigId: 'mysecret', enableConfigSubstitution: true)
+            }
+          }
+        }             
+        
         stage("Config") {
             steps {
 

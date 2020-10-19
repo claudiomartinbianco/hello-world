@@ -32,7 +32,9 @@ withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'J
                 """                 
     
     
-  sh 'gcloud auth activate-service-account --key-file $JSON_KEY'
+  sh 'sh "kubectl config set-context $(kubectl config current-context)'
+    
+    
   // sh 'make yourstuff'
 }                
                 

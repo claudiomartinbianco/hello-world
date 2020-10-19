@@ -39,8 +39,9 @@ withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'J
     /usr/local/gcloud/google-cloud-sdk/install.sh
     """
     
+    sh 'kubectl config set-context $(kubectl config current-context) --namespace=default'
     
-    sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
+    // sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
     
     sh 'kubectl get pods'    
     

@@ -10,25 +10,38 @@ pipeline {
             }
         }        
              
-                
+        stage('Prepare') {
+            timeout(time: 5, unit: 'MINUTES') {
+
+                // Install Helm
+                sh """
+                curl -Lo /tmp/helm.tar.gz https://kubernetes-helm.storage.googleapis.com/helm-${HELM_VERSION}-linux-amd64.tar.gz
+                tar -zxvf /tmp/helm.tar.gz -C /tmp
+                mv /tmp/linux-amd64/helm /usr/local/bin/helm
+                chmod +x /usr/local/bin/helm
+                """
+
+                // Install Kubectl
+                sh """
+                curl -Lo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+                chmod a+x /usr/local/bin/kubectl
+                """
+            }
+        }                
         
         stage("Config") {
             steps {
 
-        withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'GOOGLE_APPLICATION_CREDENTIALS']]) {
-          sh 'echo "${GOOGLE_APPLICATION_CREDENTIALS}"' // returns ****                
-            
-                    sh """
-                    curl -Lo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v1.4.6/bin/linux/amd64/kubectl
-                    chmod a+x /usr/local/bin/kubectl
-                    """
-            
-            sh 'kubectl config view'
-            sh 'kubectl get services'
-            
-          // sh 'gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS'
-          // sh './deploy.sh'
-        }                
+            withCredentials([file(credentialsId: 'mysecret', variable: 'KUBECONFIG')]) {
+
+              // change context with related namespace
+              sh 'kubectl config set-context $(kubectl config current-context) --namespace=default'
+
+              //Deploy with Helm
+              echo "Deploying"
+              sh 'helm upgrade --install road-dashboard -f values.${ENV}.yaml --set tag=$TAG --namespace default'
+            }                
+                              
                 
                 
             }

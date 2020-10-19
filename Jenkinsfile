@@ -13,14 +13,14 @@ pipeline {
         
         stage("Config") {
             steps {
-                script{
-                           
-                withCredentials([file(credentialsId: 'mygcp', variable: 'GC_KEY')]) {
-                    sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
-                    sh("gcloud container clusters get-credentials prod --zone northamerica-northeast1-a --project ${project}")
-                  }                                      
 
-                }
+                
+        withCredentials([[$class: 'FileBinding', credentialsId: 'mygcp', variable: 'GOOGLE_APPLICATION_CREDENTIALS']]) {
+          sh 'echo "${GOOGLE_APPLICATION_CREDENTIALS}"' // returns ****
+          sh 'gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS'
+          sh './deploy.sh'
+        }                
+                
             }
         }        
         

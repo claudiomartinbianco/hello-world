@@ -10,7 +10,7 @@ pipeline {
             }
         }        
              
-        stage('Prepare') {
+        stage("Prepare") {
             timeout(time: 5, unit: 'MINUTES') {
 
                 // Install Helm

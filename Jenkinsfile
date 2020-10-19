@@ -16,7 +16,7 @@ pipeline {
 
         withCredentials([file(credentialsId: 'mysecret', variable: 'KUBECONFIG')]) {
 
-            sh 'echo "${KUBECONFIG}"' // returns ****
+            sh 'echo "$(KUBECONFIG)"' // returns ****
           // change context with related namespace
           sh 'kubectl config set-context $(kubectl config current-context) --namespace=${namespace}'
 

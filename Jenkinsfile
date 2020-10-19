@@ -42,7 +42,7 @@ withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'J
     
     sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
     
-    sh 'kubectl get services'    
+    sh 'kubectl get pods'    
     
   // sh 'make yourstuff'
 }                

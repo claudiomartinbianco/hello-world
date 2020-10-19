@@ -41,7 +41,7 @@ withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'J
     """
     
     
-  sh 'gcloud auth activate-service-account --key-file $JSON_KEY'
+  sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
     
     
   // sh 'make yourstuff'

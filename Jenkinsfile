@@ -46,7 +46,7 @@ withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'J
   //Deploy with Helm
   // sh 'helm upgrade --install road-dashboard -f myweb.yaml --set tag=$TAG --namespace default'
     
-  sh 'kubectl get pods'
+  sh './deploy.sh'
 }                
                 
                 

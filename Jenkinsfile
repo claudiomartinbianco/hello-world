@@ -31,13 +31,15 @@ withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'J
                 chmod a+x /usr/local/bin/kubectl
                 """                 
     
-                sh """
-                curl -Lo /tmp/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
-                mkdir -p /usr/local/gcloud
-                tar -xvf /tmp/google-cloud-sdk.tar.gz -C /usr/local/gcloud               
-                echo y |/usr/local/gcloud/google-cloud-sdk/install.sh
-                chmod +x /usr/local/gcloud
-                """
+    //Install the google SDK
+    sh """
+    curl -Lo /tmp/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
+    mkdir -p /usr/local/gcloud
+    RUN tar -C /usr/local/gcloud -xvf /tmp/google-cloud-sdk.tar.gz
+    /usr/local/gcloud/google-cloud-sdk/install.sh
+    /usr/local/gcloud/google-cloud-sdk/bin/gcloud init
+    """
+    
     
   sh 'gcloud auth activate-service-account --key-file $JSON_KEY'
     

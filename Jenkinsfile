@@ -9,16 +9,17 @@ pipeline {
                 git url:'https://github.com/claudiomartinbianco/hello-world.git'
             }
         }        
+             
         
         stage("Config") {
             steps {
                 script{
+                           
                     
-                    
-                    withKubeCredentials([credentialsId: 'devsecops-gcr-credentials', contextName: 'default']) {
-                      sh 'kubectl config view'
+                    withCredentials([[$class: 'FileBinding', credentialsId: 'devsecops-gcr-credentials', variable: 'JSON_KEY']]) {
+                      sh 'gcloud auth activate-service-account --key-file $JSON_KEY'
+                      sh 'make yourstuff'
                     }                    
-                    
 
                 }
             }

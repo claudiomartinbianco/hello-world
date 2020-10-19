@@ -24,6 +24,7 @@ pipeline {
                     """
             
             sh 'kubectl config view'
+            sh 'kubectl get services'
             
           // sh 'gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS'
           // sh './deploy.sh'

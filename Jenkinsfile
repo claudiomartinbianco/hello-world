@@ -15,17 +15,12 @@ pipeline {
         stage("Config") {
             steps {
 
-        withCredentials([file(credentialsId: 'mysecret', variable: 'KUBECONFIG')]) {
-
-            sh 'echo "${KUBECONFIG}"' // returns ****
-          // change context with related namespace
-          // sh 'kubectl config set-context $(kubectl config current-context) --namespace=${namespace}'
-
-          //Deploy with Helm
-          echo 'Deploying'
-          // sh 'helm upgrade --install road-dashboard -f values.${ENV}.yaml --set tag=$TAG --namespace ${namespace}'
+        withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'GOOGLE_APPLICATION_CREDENTIALS']]) {
+          sh 'echo "${GOOGLE_APPLICATION_CREDENTIALS}"' // returns ****
+          sh 'gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS'
+          sh './deploy.sh'
         }                
-                              
+                
                 
             }
         }        

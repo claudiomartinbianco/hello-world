@@ -36,7 +36,6 @@ withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'J
                 mkdir -p /usr/local/gcloud
                 tar -xvf /tmp/google-cloud-sdk.tar.gz -C /usr/local/gcloud               
                 echo y |/usr/local/gcloud/google-cloud-sdk/install.sh
-                chmod +x ./gradlew
                 """
     
   sh 'gcloud auth activate-service-account --key-file $JSON_KEY'

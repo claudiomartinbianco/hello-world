@@ -17,7 +17,7 @@ pipeline {
             withCredentials([file(credentialsId: 'mysecret', variable: 'KUBECONFIG')]) {
 
                 sh """
-                curl -Lo /tmp/helm.tar.gz https://kubernetes-helm.storage.googleapis.com/helm-${HELM_VERSION}-linux-amd64.tar.gz
+                curl -Lo /tmp/helm.tar.gz https://kubernetes-helm.storage.googleapis.com/helm-v2.1.3-linux-amd64.tar.gz
                 tar -zxvf /tmp/helm.tar.gz -C /tmp
                 mv /tmp/linux-amd64/helm /usr/local/bin/helm
                 chmod +x /usr/local/bin/helm
@@ -25,7 +25,7 @@ pipeline {
 
                 // Install Kubectl
                 sh """
-                curl -Lo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+                curl -Lo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v1.4.6/bin/linux/amd64/kubectl
                 chmod a+x /usr/local/bin/kubectl
                 """                
                 

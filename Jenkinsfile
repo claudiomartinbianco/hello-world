@@ -9,10 +9,13 @@ pipeline {
                 git url:'https://github.com/claudiomartinbianco/hello-world.git'
             }
         }        
-             
-        stage("Prepare") {
+                     
+        
+        stage("Config") {
+            steps {
 
-                // Install Helm
+            withCredentials([file(credentialsId: 'mysecret', variable: 'KUBECONFIG')]) {
+
                 sh """
                 curl -Lo /tmp/helm.tar.gz https://kubernetes-helm.storage.googleapis.com/helm-${HELM_VERSION}-linux-amd64.tar.gz
                 tar -zxvf /tmp/helm.tar.gz -C /tmp
@@ -24,14 +27,8 @@ pipeline {
                 sh """
                 curl -Lo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl
                 chmod a+x /usr/local/bin/kubectl
-                """
-        }                
-        
-        stage("Config") {
-            steps {
-
-            withCredentials([file(credentialsId: 'mysecret', variable: 'KUBECONFIG')]) {
-
+                """                
+                
               // change context with related namespace
               sh 'kubectl config set-context $(kubectl config current-context) --namespace=default'
 

@@ -13,12 +13,13 @@ pipeline {
         stage("Config") {
             steps {
                 script{
-                    def namespace = "default"
-                        withCredentials([file(credentialsId: 'devsecops-gcr-credentials', variable: 'KUBECONFIG')]) {
+                    
+                    
+                    withKubeCredentials([credentialsId: 'devsecops-gcr-credentials', contextName: 'default']) {
+                      sh 'kubectl config view'
+                    }                    
+                    
 
-                          // change context with related namespace
-                          echo '$(kubectl config current-context)'
-                        }
                 }
             }
         }        

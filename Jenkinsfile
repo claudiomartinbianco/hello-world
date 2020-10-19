@@ -17,8 +17,11 @@ pipeline {
 
         withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'GOOGLE_APPLICATION_CREDENTIALS']]) {
           sh 'echo "${GOOGLE_APPLICATION_CREDENTIALS}"' // returns ****
-          sh 'gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS'
-          sh './deploy.sh'
+            
+kubernetesDeploy(configs: 'myweb.yaml', kubeconfigId: "${GOOGLE_APPLICATION_CREDENTIALS}", enableConfigSubstitution: true)            
+            
+          // sh 'gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS'
+          // sh './deploy.sh'
         }                
                 
                 

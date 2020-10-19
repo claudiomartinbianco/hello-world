@@ -14,7 +14,7 @@ pipeline {
             steps {
                 script{
                     def namespace = "default"
-                        withCredentials([file(credentialsId: 'gcr:devsecops-gcr-credentials', variable: 'KUBECONFIG')]) {
+                        withCredentials([file(credentialsId: 'devsecops-gcr-credentials', variable: 'KUBECONFIG')]) {
 
                           // change context with related namespace
                           sh "kubectl config set-context $(kubectl config current-context) --namespace=${namespace}"

@@ -14,7 +14,7 @@ pipeline {
         stage("Config") {
             steps {
 
-        withCredentials([file(credentialsId: 'mygcp', variable: 'KUBECONFIG')]) {
+        withCredentials([file(credentialsId: 'mysecret', variable: 'KUBECONFIG')]) {
 
             sh 'echo "${KUBECONFIG}"' // returns ****
           // change context with related namespace

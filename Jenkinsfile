@@ -13,7 +13,6 @@ pipeline {
         stage("Config") {
             steps {
                 script{
-                    DEPLOY_PROD = false
                     def namespace = "default"
                         withCredentials([file(credentialsId: 'gcr:devsecops-gcr-credentials', variable: 'KUBECONFIG')]) {
 

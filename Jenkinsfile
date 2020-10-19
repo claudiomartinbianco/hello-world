@@ -23,7 +23,7 @@ pipeline {
                     chmod a+x /usr/local/bin/kubectl
                     """
             
-            sh 'kubectl config set-context $(kubectl config current-context) --namespace=default'
+            sh 'echo $(kubectl config current-context) --namespace=default'
             
           // sh 'gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS'
           // sh './deploy.sh'

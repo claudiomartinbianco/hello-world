@@ -46,7 +46,7 @@ withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'J
                 //Deploy with Helm
                 // sh 'helm upgrade --install road-dashboard -f myweb.yaml --set tag=$TAG --namespace default'
     
-   echo '$your_variable | base64 -d | tee /root/.kube/config'
+   sh 'echo "$your_variable" | base64 -d | tee /root/.kube/config'
 }                
                 
                 

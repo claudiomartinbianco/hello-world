@@ -40,13 +40,15 @@ withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'J
                 """
     
                 // sh 'kubectl config set-context $(kubectl config current-context) --namespace=default'
+    
+    sh 'kubectl config current-context'
 
-                sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
+                // sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
 
                 //Deploy with Helm
                 // sh 'helm upgrade --install road-dashboard -f myweb.yaml --set tag=$TAG --namespace default'
     
-   sh 'echo "$your_variable" | base64 -d | tee /root/.kube/config'
+   // sh 'echo "$your_variable" | base64 -d | tee /root/.kube/config'
 }                
                 
                 

@@ -1,6 +1,13 @@
 pipeline {
     
-    agent any
+    // agent any
+    
+    agent {
+      kubernetes {
+        label 'cloud-run'
+        yamlFile 'pod.yml'
+      }
+    }    
     
     stages {
         

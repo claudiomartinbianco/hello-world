@@ -42,9 +42,16 @@ withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'J
                 // sh 'kubectl config set-context $(kubectl config current-context) --namespace=default'
     
 
-                sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
+                // sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
     
-    sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud beta run deploy bee-cd --image gcr.io/logics-2-0-nonprod/sklearn-iris:0.1 --allow-unauthenticated --platform managed --region us-east1 --quiet'
+          container('gcp-sdk'){
+              
+              sh 'gcloud auth activate-service-account --key-file $JSON_KEY'
+              
+            sh 'gcloud beta run deploy bee-cd --image gcr.io/logics-2-0-nonprod/sklearn-iris:0.1 --allow-unauthenticated --platform managed --region us-east1'
+          }    
+    
+    // sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud beta run deploy bee-cd --image gcr.io/logics-2-0-nonprod/sklearn-iris:0.1 --allow-unauthenticated --platform managed --region us-east1 --quiet'
 
     // sh 'echo "${JSON_KEY}"'
     

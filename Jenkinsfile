@@ -41,7 +41,7 @@ withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'J
     
                 // sh 'kubectl config set-context $(kubectl config current-context) --namespace=default'
     
-    sh 'kubectl config current-context'
+    sh 'kubectl config view'
 
                 // sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
 

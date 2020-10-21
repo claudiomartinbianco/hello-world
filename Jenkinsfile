@@ -20,7 +20,7 @@ pipeline {
     
                 sh '/root/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
 
-                sh '/root/google-cloud-sdk/bin/gcloud container clusters get-credentials kbe-nonprod --zone us-east4-c --project logics-2-0-nonprod'                    
+                sh '/root/google-cloud-sdk/bin/gcloud container clusters get-credentials kbe-nonprod --zone us-east4-b --project logics-2-0-nonprod'                    
                     
 
                 // sh 'kubectl config set-context $(kubectl config current-context) --namespace=default'

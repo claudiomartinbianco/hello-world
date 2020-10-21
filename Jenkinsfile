@@ -18,12 +18,7 @@ pipeline {
                 withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'JSON_KEY']]) {
     
     
-                sh """
-                curl -Lo /tmp/helm.tar.gz https://kubernetes-helm.storage.googleapis.com/helm-v2.1.3-linux-amd64.tar.gz
-                tar -zxvf /tmp/helm.tar.gz -C /tmp
-                mv /tmp/linux-amd64/helm /usr/local/bin/helm
-                chmod +x /usr/local/bin/helm
-                """
+
 
                 // Install Kubectl
                 sh """

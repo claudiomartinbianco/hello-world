@@ -1,38 +1,26 @@
----
 apiVersion: apps/v1
+
 kind: Deployment
+
 metadata:
+  name: app-dotnetcore2
+  namespace: default
   labels:
-    app: myweb
-  name: myweb
+    app: app-dotnetcore2
+
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: myweb
+      app: app-dotnetcore2
   template:
     metadata:
       labels:
-        app: myweb
+        app: app-dotnetcore2
+
     spec:
       containers:
-      - image: 35.226.40.224:5000/justme/myweb:1
-        imagePullPolicy: Always
-        name: myweb
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: myweb
-  name: myweb
-spec:
-  ports:
-  - nodePort: 32223
-    port: 80
-    protocol: TCP
-    targetPort: 80
-  selector:
-    app: myweb
-  type: NodePort
+      - name: app-dotnetcore-ctr
+        image: gcr.io/logics-2-0-nonprod/sklearn-iris:0.1
+        ports:
+        - containerPort: 80

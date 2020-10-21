@@ -21,7 +21,7 @@ pipeline {
     
                 // sh 'kubectl config set-context $(kubectl config current-context) --namespace=default'
     
-                sh '/var/jenkins_home/google-cloud-sdk/gcloud auth activate-service-account --key-file $JSON_KEY'
+                sh '/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
 
                 // sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
                     

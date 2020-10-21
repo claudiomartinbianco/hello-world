@@ -24,6 +24,8 @@ pipeline {
                 sh '/var/jenkins_home/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
                 
                 sh '/var/jenkins_home/google-cloud-sdk/bin/gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project devsecops-287721'
+                
+                sh 'kubectl create deployment cmb --image=gcr.io/devsecops-287721/hello-world:latest'
 
                 // sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
                     

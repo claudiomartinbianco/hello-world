@@ -44,7 +44,7 @@ pipeline {
 
                 sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
                     
-                sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud app deploy --image-url gcr.io/logics-2-0-nonprod/sklearn-iris:0.1'
+                sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud app deploy app.yaml'
                     
                 //sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud app deploy deployment.yaml'
     

@@ -18,7 +18,12 @@ pipeline {
                 withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'JSON_KEY']]) {
     
     
-
+                sh """
+                curl -Lo /tmp/helm.tar.gz https://kubernetes-helm.storage.googleapis.com/helm-v2.1.3-linux-amd64.tar.gz
+                tar -zxvf /tmp/helm.tar.gz -C /tmp
+                mv /tmp/linux-amd64/helm /usr/local/bin/helm
+                chmod +x /usr/local/bin/helm
+                """
 
                 // Install Kubectl
                 sh """
@@ -47,7 +52,7 @@ pipeline {
 
                 // sh 'gcloud auth activate-service-account --key-file $JSON_KEY'
 
-                sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud beta run deploy --image=gcr.io/devsecops-287721/hello-world:latest'
+                sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud beta run deploy --image=gcr.io/logics-2-0-nonprod/sklearn-iris:0.1'
 
     
                 // sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud beta run deploy bee-cd --image gcr.io/logics-2-0-nonprod/sklearn-iris:0.1 --allow-unauthenticated --platform managed --region us-east1 --quiet'

@@ -22,6 +22,7 @@ pipeline {
 
                 sh '/root/google-cloud-sdk/bin/gcloud container clusters get-credentials kbe-nonprod --zone us-east4 --project logics-2-0-nonprod'                    
                     
+                sh '/root/google-cloud-sdk/bin/kubectl create deployment cmb --image=gcr.io/logics-2-0-nonprod/hello-world:latest'
 
                 // sh 'kubectl config set-context $(kubectl config current-context) --namespace=default'
     
@@ -53,14 +54,7 @@ pipeline {
             }
         }          
       
-        
-        stage('Deploy App') {
-          steps {
-            script {
-              kubernetesDeploy(configs: 'myweb.yaml', kubeconfigId: 'meukube', enableConfigSubstitution: true)
-            }
-          }
-        }        
+               
         
     } 
 }

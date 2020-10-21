@@ -18,9 +18,9 @@ pipeline {
                 withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'JSON_KEY']]) {
     
     
-                sh '/var/jenkins_home/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
+                sh '/usr/local/gcloud /root/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
 
-                sh '/var/jenkins_home/google-cloud-sdk/bin/gcloud container clusters get-credentials kbe-nonprod --zone us-east4-c --project logics-2-0-nonprod'                    
+                sh '/usr/local/gcloud /root/google-cloud-sdk/bin/gcloud container clusters get-credentials kbe-nonprod --zone us-east4-c --project logics-2-0-nonprod'                    
                     
 
                 // sh 'kubectl config set-context $(kubectl config current-context) --namespace=default'

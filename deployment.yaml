@@ -21,6 +21,6 @@ spec:
     spec:
       containers:
       - name: app-dotnetcore-ctr
-        image: gcr.io/logics-2-0-nonprod/sklearn-iris:0.1
+        image: gcr.io/devsecops-287721/hello-world:latest
         ports:
         - containerPort: 80

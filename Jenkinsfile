@@ -37,7 +37,7 @@ pipeline {
                 mkdir -p /usr/local/gcloud
                 tar -C /usr/local/gcloud -xvf /tmp/google-cloud-sdk.tar.gz
                 /usr/local/gcloud/google-cloud-sdk/install.sh
-                ""                    
+                """
     
                 // sh 'kubectl config set-context $(kubectl config current-context) --namespace=default'
     

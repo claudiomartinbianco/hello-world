@@ -18,41 +18,19 @@ pipeline {
                 withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'JSON_KEY']]) {
     
     
-                sh '/root/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
+                    sh '/root/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
 
-                sh '/root/google-cloud-sdk/bin/gcloud container clusters get-credentials kbe-nonprod --zone us-east4 --project logics-2-0-nonprod'                    
-                    
-                sh '/root/google-cloud-sdk/bin/kubectl create deployment cmb --image=gcr.io/logics-2-0-nonprod/hello-world:latest'
+                    sh '/root/google-cloud-sdk/bin/gcloud container clusters get-credentials kbe-nonprod --zone us-east4 --project logics-2-0-nonprod'                    
 
-                // sh 'kubectl config set-context $(kubectl config current-context) --namespace=default'
+                    sh '/root/google-cloud-sdk/bin/kubectl create deployment cmb --image=gcr.io/logics-2-0-nonprod/hello-world:latest'
+
+                    sh '/var/jenkins_home/google-cloud-sdk/bin/kubectl create -f deployment.yaml'
     
 
-                // sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
-                    
-                // sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud app deploy app.yaml'
-                    
-                //sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud app deploy deployment.yaml'
-    
-                // sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud beta run deploy bee-cd --image gcr.io/logics-2-0-nonprod/sklearn-iris:0.1 --allow-unauthenticated --platform managed --region us-east1'
-
-                // sh 'gcloud auth activate-service-account --key-file $JSON_KEY'
-
-                // sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud beta run deploy --image=gcr.io/logics-2-0-nonprod/sklearn-iris:0.1'
-
-    
-                // sh '/usr/local/gcloud/google-cloud-sdk/bin/gcloud beta run deploy bee-cd --image gcr.io/logics-2-0-nonprod/sklearn-iris:0.1 --allow-unauthenticated --platform managed --region us-east1 --quiet'
-
-                // sh 'echo "${JSON_KEY}"'
-    
-                //Deploy with Helm
-                // sh 'helm upgrade --install road-dashboard -f myweb.yaml --set tag=$TAG --namespace default'
-    
-
-            }                
-                
+                }
                 
             }
-        }          
+        }  
       
                
         

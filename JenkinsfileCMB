@@ -15,7 +15,7 @@ pipeline {
             steps {         
                               
                 
-                withCredentials([[$class: 'FileBinding', credentialsId: 'mysecret', variable: 'JSON_KEY']]) {
+                withCredentials([[$class: 'FileBinding', credentialsId: 'gke-credential', variable: 'JSON_KEY']]) {
                 
 
                         sh '/var/jenkins_home/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'

@@ -18,15 +18,15 @@ pipeline {
                 withCredentials([[$class: 'FileBinding', credentialsId: 'gke-credential', variable: 'JSON_KEY']]) {
                 
 
-                        sh '/var/jenkins_home/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
+                        sh '/root/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
 
-                        sh '/var/jenkins_home/google-cloud-sdk/bin/gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project devsecops-287721'
+                        sh '/root/google-cloud-sdk/bin/gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project devsecops-287721'
 
-                        // sh '/var/jenkins_home/google-cloud-sdk/bin/kubectl create deployment cmb --image=gcr.io/devsecops-287721/hello-world:latest'
+                        // sh '/root/google-cloud-sdk/bin/kubectl create deployment cmb --image=gcr.io/devsecops-287721/hello-world:latest'
 
 
 
-                        sh '/var/jenkins_home/google-cloud-sdk/bin/kubectl create -f deployment.yaml'
+                        sh '/root/google-cloud-sdk/bin/kubectl create -f deployment.yaml'
         
                 }                
                                 

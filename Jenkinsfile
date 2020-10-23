@@ -1,22 +1,43 @@
 pipeline {
     
-    agent any    
+    agent any
+    
+    environment {        
+        registry = "gcr.io/logics-2-0-nonprod/hello-world"
+        dockerImage = ''
+    }
     
     stages {
         
-        stage("Checkout code") {
+        stage("Checkout") {
             steps {
                 git url:'https://github.com/claudiomartinbianco/hello-world.git'
+                // git credentialsId: 'bitbucket_server', url: 'https://bitbucket.whirlpoolcorp.com/scm/~biancc6/hello-world.git'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                script {
+                    dockerImage = docker.build(registry)
+                }
+            }
+        }
+
+        stage('Push') {
+            steps {
+                script {
+                    docker.withRegistry('https://gcr.io', 'gcr:gcr-credential') {
+                        dockerImage.push("${env.BUILD_NUMBER}")
+                        dockerImage.push("latest")
+                    }
+                }
             }
         }        
-                     
         
-        stage("Config") {
-            steps {         
-                              
-                
+        stage("Deploy") {
+            steps {                                              
                 withCredentials([[$class: 'FileBinding', credentialsId: 'gke-credential', variable: 'JSON_KEY']]) {
-    
     
                     sh '/root/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file $JSON_KEY'
 
@@ -25,14 +46,15 @@ pipeline {
                     // sh '/root/google-cloud-sdk/bin/kubectl create deployment cmb --image=gcr.io/logics-2-0-nonprod/hello-world:latest'
 
                     sh '/root/google-cloud-sdk/bin/kubectl create -f deployment.yaml'
-    
-
-                }
-                
+                }                
             }
         }  
-      
-               
         
-    } 
+        stage('Clean') {
+            steps {
+                sh "docker rmi $registry:$BUILD_NUMBER"
+            }
+        }
+        
+    }
 }

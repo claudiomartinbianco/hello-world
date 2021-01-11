@@ -3,7 +3,7 @@ pipeline {
     agent any
     
     environment {        
-        registry = "gcr.io/logics-2-0-nonprod/hello-world"
+        registry = "gcr.io/quantum-talent-301321/hello-world"
         dockerImage = ''
     }
     

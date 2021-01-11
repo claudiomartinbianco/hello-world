@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: app-hello-world-ctr
-        image: gcr.io/devsecops-287721/hello-world:latest
+        image: gcr.io/quantum-talent-301321/hello-world:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80

@@ -7,11 +7,19 @@ res.end('Hi Whirlpool!');
 server.listen(80);
 
 
-public deleteTrack(index: number) {
- // out of bound check
- if(!(index <= this.tracks.length)) {
-   return;
- }
-
- this.tracks.splice(index,1);
+function add(numbers) {
+    var result = 0;
+    var parts = numbers.split(',');
+    for (var i = 0; i < parts.length; i++) {
+        var integer = parseInt(parts[i]);
+        if (!isNaN(integer)) {
+            if (integer >= 0) {
+                if (integer <= 1000) {
+                    result += integer;
+                }
+            }
+        }
+    }
+    
+    return result;
 }

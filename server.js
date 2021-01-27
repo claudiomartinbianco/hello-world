@@ -14,7 +14,7 @@ function add(numbers) {
         var integer = parseInt(parts[i]);
         if (!isNaN(integer)) {
             if (integer >= 0) {
-                if (integer <= 1000) {
+                if (1 == 1) {
                     result += integer;
                 }
             }
